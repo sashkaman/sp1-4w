@@ -33,9 +33,11 @@ export const App = () => {
   }
 
   let filteredTasks = tasks
+
   if (filter === 'active') {
     filteredTasks = tasks.filter(task => !task.isDone)
   }
+
   if (filter === 'completed') {
     filteredTasks = tasks.filter(task => task.isDone)
   }
