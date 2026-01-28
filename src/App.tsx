@@ -11,7 +11,16 @@ export type Task = {
 
 export type FilterValues = 'all' | 'active' | 'completed'
 
+// create +
+// read + (filter, sort, pagination)
+// update + 
+// delete +
+
+// CRUD => CLI, GUI, VUI
+
 export const App = () => {
+  // console.log(typeof v1())
+
   const [filter, setFilter] = useState<FilterValues>('all')
 
   const [tasks, setTasks] = useState<Task[]>([
@@ -44,14 +53,6 @@ export const App = () => {
     const newTasks = [newTask, ...tasks]
     setTasks(newTasks)
   }
-
-  // const changeTaskStatus = (taskId: string, isDone: boolean) => {
-  //   const task = tasks.find(t => t.id === taskId)
-  //   if (task) {
-  //     task.isDone = isDone
-  //     setTasks([...tasks])
-  //   }
-  // }
 
   return (
     <div className="app">

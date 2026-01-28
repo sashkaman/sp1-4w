@@ -10,7 +10,12 @@ type Props = {
   createTask: (title: string) => void
 }
 
-export const TodolistItem = ({ title, tasks, deleteTask, changeFilter, createTask }: Props) => {
+export const TodolistItem = ({ title,
+  tasks,
+  deleteTask,
+  changeFilter,
+  createTask }: Props) => {
+
   const [taskTitle, setTaskTitle] = useState('')
 
   const createTaskHandler = () => {
@@ -35,8 +40,14 @@ export const TodolistItem = ({ title, tasks, deleteTask, changeFilter, createTas
         <input value={taskTitle}
           onChange={changeTaskTitleHandler}
           onKeyDown={createTaskOnEnterHandler} />
-        <Button title={'+'} onClick={createTaskHandler} />
+        <Button title={'+'} onClick={createTaskHandler} disabled={!taskTitle || taskTitle.length > 10} />
       </div>
+
+      {!taskTitle && <div>Max title lenght is 10 charters</div>}
+      {taskTitle.length > 10 && <div style={{ color: 'red' }}>Max title lenght is 10 charters</div>}
+      {taskTitle && taskTitle.length <= 9 && <div>Your title lenght is {taskTitle.length} charters</div>}
+
+
       {tasks.length === 0 ? (
         <p>Тасок нет</p>
       ) : (
@@ -46,17 +57,10 @@ export const TodolistItem = ({ title, tasks, deleteTask, changeFilter, createTas
               deleteTask(task.id)
             }
 
-            debugger
-
-            const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-              const newStatusValue = e.currentTarget.checked
-            }
-
             return (
               <li key={task.id}>
                 <input type="checkbox"
-                  checked={task.isDone}
-                  onChange={changeTaskStatusHandler} />
+                  checked={task.isDone} />
                 <span>{task.title}</span>
                 <Button title={'x'} onClick={deleteTaskHandler} />
               </li>
