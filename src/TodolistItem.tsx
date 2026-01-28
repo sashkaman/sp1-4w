@@ -10,13 +10,7 @@ type Props = {
   createTask: (title: string) => void
 }
 
-export const TodolistItem = ({
-  title,
-  tasks,
-  deleteTask,
-  changeFilter,
-  createTask }: Props) => {
-
+export const TodolistItem = ({ title, tasks, deleteTask, changeFilter, createTask }: Props) => {
   const [taskTitle, setTaskTitle] = useState('')
 
   const createTaskHandler = () => {
@@ -34,23 +28,15 @@ export const TodolistItem = ({
     }
   }
 
-  const changeTaskStatusHandler = (e: ChangeEvent<HTMLElement>) => {
-    const newStatusValue = e.currentTarget.checked
-    changeTaskStatus(task.id, newStatusValue)
-  }
-
   return (
     <div>
       <h3>{title}</h3>
-
       <div>
         <input value={taskTitle}
           onChange={changeTaskTitleHandler}
           onKeyDown={createTaskOnEnterHandler} />
-
         <Button title={'+'} onClick={createTaskHandler} />
       </div>
-
       {tasks.length === 0 ? (
         <p>Тасок нет</p>
       ) : (
@@ -60,18 +46,17 @@ export const TodolistItem = ({
               deleteTask(task.id)
             }
 
+            debugger
+
+            const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
+              const newStatusValue = e.currentTarget.checked
+            }
+
             return (
               <li key={task.id}>
-
-                {/* <input 
-                type="checkbox" 
-                checked={task.isDone} /> */}
-
-                <input
-                  type="checkbox"
+                <input type="checkbox"
                   checked={task.isDone}
                   onChange={changeTaskStatusHandler} />
-
                 <span>{task.title}</span>
                 <Button title={'x'} onClick={deleteTaskHandler} />
               </li>
@@ -79,7 +64,6 @@ export const TodolistItem = ({
           })}
         </ul>
       )}
-
       <div>
         <Button title={'All'} onClick={() => changeFilter('all')} />
         <Button title={'Active'} onClick={() => changeFilter('active')} />
