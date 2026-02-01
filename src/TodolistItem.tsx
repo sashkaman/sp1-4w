@@ -19,10 +19,16 @@ export const TodolistItem = ({ title,
   changeTaskStatus }: Props) => {
 
   const [taskTitle, setTaskTitle] = useState('')
+  const [error, setError] = useState<string | null>(null)
 
   const createTaskHandler = () => {
-    createTask(taskTitle)
-    setTaskTitle('')
+    const trimmedTitle = taskTitle.trim()
+    if (trimmedTitle !== '') {
+      createTask(trimmedTitle)
+      setTaskTitle('')
+    } else {
+      setError('Title is required')
+    }
   }
 
   const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,15 +46,17 @@ export const TodolistItem = ({ title,
       <h3>{title}</h3>
 
       <div>
-        <input value={taskTitle}
+        <input className={error ? 'error' : ''}
+          value={taskTitle}
           onChange={changeTaskTitleHandler}
           onKeyDown={createTaskOnEnterHandler} />
         <Button title={'+'} onClick={createTaskHandler} disabled={!taskTitle || taskTitle.length > 10} />
+        {error && <div className={'error-message'}>{error}</div>}
       </div>
 
-      {!taskTitle && <div>Max title lenght is 10 charters</div>}
+      {/* {!taskTitle && <div>Max title lenght is 10 charters</div>}
       {taskTitle.length > 10 && <div style={{ color: 'red' }}>Max title lenght is 10 charters</div>}
-      {taskTitle && taskTitle.length <= 9 && <div>Your title lenght is {taskTitle.length} charters</div>}
+      {taskTitle && taskTitle.length <= 9 && <div>Your title lenght is {taskTitle.length} charters</div>} */}
 
 
       {tasks.length === 0 ? (

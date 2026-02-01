@@ -3,6 +3,14 @@
   display: flex;
 }
 
-.app > div {
+.app>div {
   margin-right: 50px;
+}
+
+.error {
+  border: red 1px solid
+}
+
+.error-message {
+  color: red;
 }
