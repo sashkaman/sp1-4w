@@ -9,6 +9,7 @@ type Props = {
   changeFilter: (filter: FilterValues) => void
   createTask: (title: string) => void
   changeTaskStatus: (taskId: string, isDone: boolean) => void
+  filter?: string
 }
 
 export const TodolistItem = ({ title,
@@ -16,7 +17,8 @@ export const TodolistItem = ({ title,
   deleteTask,
   changeFilter,
   createTask,
-  changeTaskStatus }: Props) => {
+  changeTaskStatus,
+  filter }: Props) => {
 
   const [taskTitle, setTaskTitle] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -33,6 +35,7 @@ export const TodolistItem = ({ title,
 
   const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setTaskTitle(event.currentTarget.value)
+    setError(null)
   }
 
   const createTaskOnEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -82,9 +85,13 @@ export const TodolistItem = ({ title,
         </ul>
       )}
       <div>
-        <Button title={'All'} onClick={() => changeFilter('all')} />
-        <Button title={'Active'} onClick={() => changeFilter('active')} />
-        <Button title={'Completed'} onClick={() => changeFilter('completed')} />
+        <Button className={filter === 'all' ? 'active-filter' : ''}
+          title={'All'}
+          onClick={() => changeFilter('all')} />
+        <Button className={filter === 'active' ? 'active-filter' : ''}
+          title={'Active'} onClick={() => changeFilter('active')} />
+        <Button className={filter === 'completed' ? 'active-filter' : ''}
+          title={'Completed'} onClick={() => changeFilter('completed')} />
       </div>
     </div>
   )
