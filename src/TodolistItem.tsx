@@ -61,6 +61,7 @@ export const TodolistItem = ({ title,
       {taskTitle.length > 10 && <div style={{ color: 'red' }}>Max title lenght is 10 charters</div>}
       {taskTitle && taskTitle.length <= 9 && <div>Your title lenght is {taskTitle.length} charters</div>} */}
 
+      {/* {taskTitle.length > 10 && <div style={{ color: 'red' }}>Max title lenght is 10 charters</div>} */}
 
       {tasks.length === 0 ? (
         <p>Тасок нет</p>
@@ -72,7 +73,7 @@ export const TodolistItem = ({ title,
             }
 
             return (
-              <li key={task.id}>
+              <li key={task.id} className={task.isDone ? 'is-Done' : ''}>
                 <input type="checkbox"
                   checked={task.isDone}
                   onChange={(e) => changeTaskStatus(task.id, e.currentTarget.checked)}
