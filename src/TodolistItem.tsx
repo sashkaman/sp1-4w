@@ -9,7 +9,7 @@ type Props = {
   changeFilter: (filter: FilterValues) => void
   createTask: (title: string) => void
   changeTaskStatus: (taskId: string, isDone: boolean) => void
-  filter?: string
+  filter?: FilterValues
 }
 
 export const TodolistItem = ({ title,
@@ -89,9 +89,11 @@ export const TodolistItem = ({ title,
           title={'All'}
           onClick={() => changeFilter('all')} />
         <Button className={filter === 'active' ? 'active-filter' : ''}
-          title={'Active'} onClick={() => changeFilter('active')} />
+          title={'Active'}
+          onClick={() => changeFilter('active')} />
         <Button className={filter === 'completed' ? 'active-filter' : ''}
-          title={'Completed'} onClick={() => changeFilter('completed')} />
+          title={'Completed'}
+          onClick={() => changeFilter('completed')} />
       </div>
     </div>
   )
